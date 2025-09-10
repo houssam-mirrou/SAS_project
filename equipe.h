@@ -15,7 +15,7 @@
 
 //la decoration du code 
 
-int col_width = 12;
+int col_width = 8;
 
 //print header **
 
@@ -29,10 +29,6 @@ void print_semi_head(){
 
 void print_header_footer(){
     int i=0;
-    printf("*");
-	for(i=0;i<col_width+4;i++){
-		printf("*");
-	}
     for(i=0;i<9;i++){
         print_semi_head();
     }
@@ -692,7 +688,7 @@ void fenetre_choix_modification(joueur equipe[],int idx){
             modifier_age(equipe,idx);
             break;
         case 3:
-            modifier_poste(equipe,idx);
+            modifier_but(equipe,idx);
             break;
     }
 }
@@ -826,7 +822,7 @@ int fenetre_supprimer(joueur equipe[],int n){
             scanf("%d",&id);
         } while(id<1);
         idx = recherche_par_id_joueur(equipe,n,id);
-        if(idx == 0){
+        if(idx == -1){
             print_error_ou_titre("Le joueur n'existe pas !!");
             return n;
         }
@@ -883,7 +879,7 @@ void fenetre_recherche_joueur(joueur equipe[],int n){
             scanf("%d",&id);
         } while(id<1);
         idx = recherche_par_id_joueur(equipe,n,id);
-        if(idx == 0){
+        if(idx == -1){
             print_error_ou_titre("Le joueur n'existe pas !!");
             return;
         }
@@ -900,7 +896,7 @@ float moyen_des_age(joueur equipe[],int n){
         moy+=equipe[i].age;
     }
     moy/=n;
-    return n;
+    return moy;
 }
 
 //fonction pour afficher les joueur ayant x but

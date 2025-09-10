@@ -1090,19 +1090,42 @@ int lire_depui_fichier(joueur equipe[], int n){
     return n;
 }
 
-/*joueur* stocker_titule(joueur equipe[],int n){
+joueur* stocker_tab_tit(joueur equipe[],int n){
     int i,j=0;
-    joueur temp[11];
+    joueur *temp = malloc(sizeof(joueur) *11);
     for(i=0;i<n;i++){
         if(strcmp(equipe[i].statut,"titulaire") == 0){
             temp[j]=equipe[i];
         }
     }
-    return &temp;
-}*/
+    return temp;
+}
+
+
+joueur return_joueur_par_post(joueur equipe[],int n,char post[]){
+    int i=0;
+    joueur temp;
+    for(i=0;i<n;i++){
+        if(strcmp(equipe[i].poste,post) == 0){
+            temp=equipe[i];
+            supprimer_un_joueur(equipe,n,i);
+            return temp;
+        }
+    }
+}
 
 void afficher_le_plan(joueur equipe[],int n) {
-    joueur plan[11] ;
+    joueur *plan ;
+    plan=stocker_tab_tit(equipe,n);
+    joueur temp_1,temp_2,temp_3,temp_4;
+    printf("+------------------------------+\n");
+    printf("|        |            |        |\n");
+    printf("|        |            |        |\n");
+    printf("|        +------------+        |\n");
+    printf("|        \\          /         |\n");
+    printf("|         \\        /         |\n");
+    printf("|          \\      /         |\n");
+    printf("|           \\----/         |\n");
 }
 
 void main_2(){
@@ -1133,11 +1156,11 @@ void main_2(){
         printf("\n"RESET);
         printf("Donner votre choix : ");
         scanf("%d",&choix);
-        if(choix <1 || choix >8){
+        if(choix <1 || choix > 9){
             do {
                 printf("Donner un choix convenable : ");
                 scanf("%d",&choix);
-            } while(choix <1 && choix >8);
+            } while(choix <1 && choix >9);
         }
         switch (choix){
             case 1 :

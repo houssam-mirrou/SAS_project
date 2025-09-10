@@ -1,0 +1,11 @@
+Id	Nom	Prenom	Numero du Maillot	Post	Age	But	Date Inscription	Status
+10	Salah	mohamed	11	attaquant	33	230	22/6/2017	tutulaire
+5	bellingham	jude	5	milieu	22	40	1/7/2023	remplacant
+8	davies	alphonso	19	defenseur	24	10	6/1/2019	remplacant
+4	deBruyne	kevin	17	milieu	34	89	30/8/2015	tutulaire
+9	donnarumma	gianluigi	99	gardien	26	0	1/7/2021	remplacant
+2	haaland	erling	9	attaquant	25	198	1/7/2022	titulaire
+1	mbappe	kylian	7	attaquant	26	212	10/6/2016	titulaire
+3	messi	lionel	10	attaquant	38	831	1/8/2004	tutulaire
+7	pedri	gonzalez	8	milieu	22	15	20/9/2020	remplacant
+6	vinicius	junior	7	attaquant	25	80	30/7/2018	tutulaire

@@ -4,8 +4,8 @@
 #include "animation.h"
 
 int main () {
-    main_2();
-    //animation_kick();
+    //main_2();
+    main_3();
 
     return 0;
 }

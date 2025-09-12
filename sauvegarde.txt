@@ -2,7 +2,7 @@ Id	Nom	Prenom	Numero du Maillot	Post	Age	But	Date Inscription	Status
 1	courtois	thibaut	1	gardien	33	0	1/7/2018	titulaire
 2	lunin	andriy	13	gardien	26	0	1/7/2018	remplacant
 3	carvajal	dani	2	defenseur	33	8	1/7/2013	titulaire
-4	rudiger	antonio	22	defenseur	44	18	1/7/2022	titulaire
+4	rudiger	antonio	22	defenseur	32	18	1/7/2022	titulaire
 5	alaba	david	4	defenseur	33	35	1/7/2021	titulaire
 6	mendy	ferland	23	defenseur	30	5	1/7/2019	titulaire
 7	nacho	fernandez	6	defenseur	35	15	1/7/2012	remplacant

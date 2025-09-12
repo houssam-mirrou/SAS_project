@@ -330,6 +330,25 @@ char* transformer_miniscule(char temp[]){
     return temp;
 }
 
+char* supprimer_espace(char tab[]){
+    int i;
+    int cpt;
+    while(tab[i]!='\0'){
+        if(tab[i] == ' '){
+            int j=i;
+            while(est_car(tab[j]) ==0){
+                j++;
+            }
+            tab[i]=tab[j];
+        }
+        i++;
+    }
+}
+
+char* suprrim2(char tab[]){
+    int
+}
+
 //compter combien joueur est titulaire
 
 int compter_titul(joueur equipe[] , int n){
@@ -499,20 +518,25 @@ int ajout_multiple_joueur(joueur equipe[] ,int n){
 
 int fentre_ajout(joueur equipe[],int n){
     system("cls");
+    printf(BLU);
     print_error_ou_titre("Fenetre d'ajout des joueurs");
-    print_elem_menu("1. Ajouter un seul joueur :",GRN);
-    print_elem_menu("2. Ajouter multiple joueur :",BLU);
+    printf(RESET);
+    print_elem_menu("1. Ajouter un seul joueur :",CYN);
+    print_elem_menu("2. Ajouter multiple joueur :",CYN);
+    print_elem_menu("0. Quitter :",RED);
     print_header_footer();
     int choix = 0;
     printf("Donner votre choix : ");
     scanf("%d",&choix);
-    if(choix<1 || choix>2){
+    if(choix<0 || choix>2){
         do {
             printf("Donner un choix convenable : ");
             scanf("%d",&choix);
-        } while(choix <1 && choix >2);
+        } while(choix <0 && choix >2);
     }
     switch (choix){
+        case 0 :
+            return n;
         case 1:
             n=ajouter_un_joueuer(equipe,n);
             break;
@@ -520,7 +544,9 @@ int fentre_ajout(joueur equipe[],int n){
             n=ajout_multiple_joueur(equipe,n);
             break;
     }       
+    printf(GRN);
     print_error_ou_titre("Le joueur a ete ajouter avec succee .");
+    printf(RESET);
     return n;
 }
 
@@ -532,6 +558,27 @@ int section_tri_ordre_alph(joueur equipe[],int debut,int fin){
     int j;
     for(j=debut;j<fin;j++){
         if(strcmp(equipe[j].nom,pivot.nom) <0){
+            i++;
+            joueur temp =equipe[i];
+            equipe[i]=equipe[j];
+            equipe[j]=temp;
+        }
+    }
+    i++;
+    joueur temp =equipe[i];
+    equipe[i]=equipe[fin];
+    equipe[fin]=temp;
+    return i;
+}
+
+//tri par ordre alphabetique
+
+int section_tri_ordre_statut(joueur equipe[],int debut,int fin){
+    int i=debut-1;
+    joueur pivot = equipe[fin];
+    int j;
+    for(j=debut;j<fin;j++){
+        if(strcmp(equipe[j].statut,pivot.statut) <0){
             i++;
             joueur temp =equipe[i];
             equipe[i]=equipe[j];
@@ -630,17 +677,27 @@ void tri_equipe(joueur equipe[],int debut,int fin,int choix){
             tri_equipe(equipe,debut,pi-1,choix);
             tri_equipe(equipe,pi+1,fin,choix);
         }
+        if(choix == 5){
+            int pi = section_tri_ordre_statut(equipe,debut,fin);
+            tri_equipe(equipe,debut,pi-1,choix);
+            tri_equipe(equipe,pi+1,fin,choix);
+        }
     }
 }
 
 //afficher une equipe
 
 void afficher_equipe(joueur equipe[],int n){
+    printf(CYN);
     print_entete_du_tableaux();
+    printf(WHT);
     for(int i=0;i<n;i++){
         print_value(equipe[i]);
     }
+    printf(RESET);
+    printf(CYN);
     print_header_footer();
+    printf(RESET);
 }
 
 //fenetre d'affichage baser sur le choix
@@ -648,25 +705,33 @@ void afficher_equipe(joueur equipe[],int n){
 void fenetre_affichage(joueur equipe[] ,int n){
     system("cls");
     if(n==0){
+        printf(RED);
         print_error_ou_titre("L'equipe n'a aucun joueur !! ");
+        printf(RESET);
         return;
     }
-    print_error_ou_titre("Fenettre d'affichage ");
-    print_elem_menu("1. Afficher les joueurs trier le nom par ordre alphabetique.",GRN);
-    print_elem_menu("2. Afficher les joueurs trier par age.",MAG);
+    printf(BLU);
+    print_error_ou_titre("Fenettre d'affichage (Tri de l'equipe)");
+    printf(RESET);
+    print_elem_menu("1. Afficher les joueurs trier le nom par ordre alphabetique.",CYN);
+    print_elem_menu("2. Afficher les joueurs trier par age.",CYN);
     print_elem_menu("3. Afficher les joueurs trier par poste.",CYN);
-    print_elem_menu("4. Afficher les joueur trier par id",GRN);
+    print_elem_menu("4. Afficher les joueur trier par id",CYN);
+    print_elem_menu("5. Afficher les joueur trier par le statut",CYN);
+    print_elem_menu("0. Quitter",RED);
     print_header_footer();
-    int choix = 0;
+    int choix = -1;
     printf("Donner votre choix : ");
     scanf("%d",&choix);
-    if(choix<1 || choix>4){
+    if(choix<0 || choix>5){
         do {
             printf("Donner un choix convenable : ");
             scanf("%d",&choix);
-        } while(choix <1 && choix >4);
+        } while(choix <0 && choix >5);
     }
     switch (choix){
+        case 0 :
+            return;
         case 1:
             tri_equipe(equipe,0,n-1,choix);
             afficher_equipe(equipe,n);
@@ -680,6 +745,10 @@ void fenetre_affichage(joueur equipe[] ,int n){
             afficher_equipe(equipe,n);
             break;
         case 4 :
+            tri_equipe(equipe,0,n-1,choix);
+            afficher_equipe(equipe,n);
+            break;
+        case 5 :
             tri_equipe(equipe,0,n-1,choix);
             afficher_equipe(equipe,n);
             break;
@@ -743,8 +812,10 @@ void modifier_statut(joueur equipe[],int idx,int n){
     int cpt = compter_titul(equipe,n);
     if(cpt>=11){
         do {
+            printf(RED);
             printf("Il y a deja 11 titulaire dans l'equipe tu doit le saisie en remplacant puis modifier un statut d'un joueur : ");
             scanf("%s",stat);
+            printf(RESET);
         } while(verifier_statut(stat) == 0 || strcmp(stat,"titulaire")==0);
     }
     if(verifier_statut(stat) == 0){
@@ -762,20 +833,23 @@ void fenetre_choix_modification(joueur equipe[],int idx,int n){
     system("cls");
     print_header_footer();
     print_elem_menu("1. Modifier un poste joueur.",CYN);
-    print_elem_menu("2. Modifier l'age du joueur.",MAG);
-    print_elem_menu("3. Modifier les buts marque par le joueur.",GRN);
-    print_elem_menu("4. Modifier le status d un joueur.",BLU);
+    print_elem_menu("2. Modifier l'age du joueur.",CYN);
+    print_elem_menu("3. Modifier les buts marque par le joueur.",CYN);
+    print_elem_menu("4. Modifier le status d un joueur.",CYN);
+    print_elem_menu("0. Quitter.",RED);
     print_header_footer();
-    int choix = 0;
+    int choix = -1;
     printf("Donner votre choix : ");
     scanf("%d",&choix);
-    if(choix<1 || choix>4){
+    if(choix<0 || choix>4){
         do {
             printf("Donner un choix convenable : ");
             scanf("%d",&choix);
-        } while(choix <1 && choix >4);
+        } while(choix <0 && choix >4);
     }
     switch(choix){
+        case 0 :
+            return;
         case 1:
             modifier_poste(equipe,idx);
             break;
@@ -789,10 +863,14 @@ void fenetre_choix_modification(joueur equipe[],int idx,int n){
             modifier_statut(equipe,idx,n);
             break;
     }
+    printf(GRN);
     print_error_ou_titre("Le joueur apres la modification.");
+    printf(RESET);
+    printf(CYN);
     print_entete_du_tableaux();
     print_value(equipe[idx]);
     print_header_footer();
+    printf(RESET);
 }
 
 //fenetre de choix de modification par le nom ou identite
@@ -800,26 +878,34 @@ void fenetre_choix_modification(joueur equipe[],int idx,int n){
 void fenetre_choix_modification_par_nom_ou_ident(joueur equipe[],int n){
     system("cls");
     if(n==0){
+        printf(RED);
         print_error_ou_titre("L'equipe est vide !!");
+        printf(RESET);
         return;
     }
+    printf(BLU);
     print_error_ou_titre("Fenetre de choix des modification");
+    printf(RESET);
     print_elem_menu("1. Modifier par nom et prenom.",CYN);
-    print_elem_menu("2. Modifier par identiter de joueur.",MAG);
+    print_elem_menu("2. Modifier par identiter de joueur.",CYN);
+    print_elem_menu("0. Quitter.",RED);
     print_header_footer();
-    int choix = 0;
+    int choix = -1;
+    printf(CYN);
     printf("Donner votre choix : ");
     scanf("%d",&choix);
-    if(choix<1 || choix>2){
+    if(choix<0 || choix>2){
         do {
             printf("Donner un choix convenable : ");
             scanf("%d",&choix);
-        } while(choix <1 && choix >2);
+        } while(choix <0 && choix >2);
     }
     int idx=-1;
     int id=-1;
     char nm[TAILLE],pren[TAILLE];
     switch (choix){
+        case 0 :
+            return;
         case 1:
             printf("Donner le nom de joueur : ");
             scanf("%s",nm);
@@ -880,25 +966,32 @@ int supprimer_un_joueur(joueur equipe[] ,int n ,int idx){
 int fenetre_supprimer(joueur equipe[],int n){
     system("cls");
     if(n==0){
+        printf(RED);
         print_error_ou_titre("L'equipe est vide !!");
+        printf(RESET);
         return n;
     }
+    printf(BLU);
     print_error_ou_titre("Fenetre de choix des suppressions");
+    printf(RESET);
     print_elem_menu("1. Supprimer par nom et prenom.",CYN);
-    print_elem_menu("2. Supprimer par identiter de joueur.",MAG);
+    print_elem_menu("2. Supprimer par identiter de joueur.",CYN);
+    print_elem_menu("0. Quitter.",RED);
     print_header_footer();
-    int choix = 0;
+    int choix = -1;
     int idx=-1;
     char nm[TAILLE],pren[TAILLE];
     printf("Donner votre choix : ");
     scanf("%d",&choix);
-    if(choix<1 || choix>2){
+    if(choix<0 || choix>2){
         do {
             printf("Donner un choix convenable : ");
             scanf("%d",&choix);
-        } while(choix <1 && choix >2);
+        } while(choix <0 && choix >2);
     }
     switch (choix){
+        case 0 :
+            return n;
     case 1:
         //le nom avec verification
         printf("Donner le nom de joueur : ");
@@ -944,9 +1037,11 @@ int fenetre_supprimer(joueur equipe[],int n){
         n=supprimer_un_joueur(equipe,n,idx);
         break;
     }
+    printf(GRN);
     print_error_ou_titre("L'equipe apres la suppresion : ");
     afficher_equipe(equipe,n);
     print_header_footer();
+    printf(RESET);
     return n;
 }
 
@@ -969,26 +1064,31 @@ void rechercher_par_post(joueur equipe[],int n,char post[]){
 void fenetre_recherche_joueur(joueur equipe[],int n){
     system("cls");
     if(n==0){
+        printf(RED);
         print_error_ou_titre("L'equipe est vide !!!");
+        printf(RESET);
         return;
     }
     print_error_ou_titre("Fenettre de recherche");
     print_elem_menu("1. Rechercher par le nom.",CYN);
     print_elem_menu("2. Rechercher par l'identiter de joueur.",MAG);
     print_elem_menu("3. Rechercher par post.",CYN);
+    print_elem_menu("0. Quitter.",RED);
     print_header_footer();
-    int choix = 0;
+    int choix = -1;
     int idx=-1;
     char nm[TAILLE],pren[TAILLE];
     printf("Donner votre choix : ");
     scanf("%d",&choix);
-    if(choix<1 || choix>3){
+    if(choix<0 || choix>3){
         do {
             printf("Donner un choix convenable : ");
             scanf("%d",&choix);
-        } while(choix <1 && choix >3);
+        } while(choix <0 && choix >3);
     }
     switch (choix){
+    case 0 :
+        return;
     case 1:
         //le nom avec verification
         printf("Donner le nom de joueur : ");
@@ -1137,10 +1237,14 @@ void fenetre_statistique(joueur equipe[],int n){
     system("cls");
     
     if(n==0){
+        printf(RED);
         print_error_ou_titre("L'equipe est vide !!");
+        printf(RESET);
         return;
     }
+    printf(BLU);
     print_error_ou_titre("Fenetre des Statistiques");
+    printf(RESET);
     printf("\n");
 
     int but ;
@@ -1156,8 +1260,8 @@ void fenetre_statistique(joueur equipe[],int n){
 
     float moy=moyen_des_age(equipe,n);
     print_header_footer();
-    print_elem_menu_avec_extra_par_int("Le nombre totale des joueur est : ",WHT,n);
-    print_elem_menu_avec_extra_par_float("Le moyenne des age est: ",WHT,moy);
+    print_elem_menu_avec_extra_par_int("Le nombre totale des joueur est : ",CYN,n);
+    print_elem_menu_avec_extra_par_float("Le moyenne des age est: ",CYN,moy);
     afficher_les_joueur_avec_x_but(equipe,n,but);
     afficher_butteur(equipe,n);
     afficher_jeune_age(equipe,n);
@@ -1170,7 +1274,9 @@ void enregistrer_fichier(joueur equipe[],int n){
     system("cls");
     FILE *f;
     if(n==0){
+        printf(RED);
         print_error_ou_titre("L'equipe est vide !!");
+        printf(RESET);
         return;
     }
     f=fopen("sauvegarde.txt","w+");
@@ -1193,7 +1299,9 @@ void enregistrer_fichier(joueur equipe[],int n){
     }
     fflush(f);
     fclose(f);
+    printf(GRN);
     print_error_ou_titre("L'enregistrement dans le fichier sauvegarde.txt a fait en succes");
+    printf(RESET);
 }
 
 //lire depuis un fichier
@@ -1203,7 +1311,9 @@ int lire_depui_fichier(joueur equipe[], int n){
     system("cls");
     f=fopen("equipe.txt","r");
     if(f==NULL){
+        printf(RED);
         print_error_ou_titre("Il y a un erreur lorsque ouverir le fichier !! ");
+        printf(RESET);
     }
     joueur temp;
     char c[256];
@@ -1235,7 +1345,9 @@ int lire_depui_fichier(joueur equipe[], int n){
         }
     }
     fclose(f);
+    printf(GRN);
     print_error_ou_titre("La lecture depuis un fichier a faites en succee.");
+    printf(RESET);
     return n;
 }
 
@@ -1382,8 +1494,18 @@ int nbr_titul(joueur equipe[],int n){
 
 
 void afficher_le_plan(joueur equipe[], int n) {
+    system("cls");
     if(nbr_titul(equipe,n)<11){
+        printf(RED);
         print_error_ou_titre("l'equipe a moins de 11 titulaire !!");
+        printf(RESET);
+        return;
+    }
+    if(n==0){
+        printf(RED);
+        print_error_ou_titre("l'equipe est vide !!");
+        printf(RESET);
+        return;
     }
     joueur attaquant[3],milieu[3],defenseur[4],gardien[1];
     return_joueur_par_post_etape1(equipe, n, "attaquant", 3,attaquant);
@@ -1414,15 +1536,15 @@ void main_2(){
         int i = 0;
         printf(BLU);
         print_header_footer();
-        print_elem_menu(" 1. Ajouter un ou plusieur joueur ." ,BLU);
+        print_elem_menu(" 1. Ajouter un ou plusieur joueur ." ,GRN);
         print_elem_menu(" 2. Afficher les joueur d'equipe." ,GRN);
-        print_elem_menu(" 3. Modifier un joueur." ,YEL);
-        print_elem_menu(" 4. Supprimer un joueur." ,MAG);
+        print_elem_menu(" 3. Modifier un joueur." ,CYN);
+        print_elem_menu(" 4. Supprimer un joueur." ,RED);
         print_elem_menu(" 5. Rechercher un joueur." ,CYN);
-        print_elem_menu(" 6. Statistiques du l'equipe." ,WHT);
-        print_elem_menu(" 7. Enregistrer l equipe dans le fichier.",BLU);
-        print_elem_menu(" 8. Liser les donner depuis un fichier.",GRN);
-        print_elem_menu(" 9. Afficher le plan du l'equipe." ,RED);
+        print_elem_menu(" 6. Statistiques du l'equipe." ,GRN);
+        print_elem_menu(" 7. Enregistrer l equipe dans le fichier.",CYN);
+        print_elem_menu(" 8. Liser les donner depuis un fichier.",CYN);
+        print_elem_menu(" 9. Afficher le plan du l'equipe." ,GRN);
         print_elem_menu(" 10. Quiter le program." ,RED);
         
         if(n!=0){

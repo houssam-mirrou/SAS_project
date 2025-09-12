@@ -350,22 +350,22 @@ int ajouter_un_joueuer(joueur equipe[],int n){
 
     //ajouter le nom avec verification
 
-    printf("Donner le nom de joueur                      : ");
+    printf("Donner le nom de joueur : ");
     scanf("%s",nm);
     if(verif_nom(nm) == 0){
         do{
-            printf("Donner un nom propre pour le joueur          : ");
+            printf("Donner un nom propre pour le joueur : ");
             scanf("%s",nm);
         } while (verif_nom(nm) == 0);
     }
     strcpy(nm,transformer_miniscule(nm));
     //ajouter le prenom avec verification
 
-    printf("Donner le prenom de joueur                   : ");
+    printf("Donner le prenom de joueur : ");
     scanf("%s",pren);
     if(verif_nom(pren) == 0){
         do{
-            printf("Donner un prenom propre pour le joueur       : ");
+            printf("Donner un prenom propre pour le joueur : ");
             scanf("%s",pren);
         } while (verif_nom(pren) == 0);
     }
@@ -500,18 +500,15 @@ int ajout_multiple_joueur(joueur equipe[] ,int n){
 int fentre_ajout(joueur equipe[],int n){
     system("cls");
     print_error_ou_titre("Fenetre d'ajout des joueurs");
-    printf("\n");
-    printf("\n");
-    print_header_footer();
     print_elem_menu("1. Ajouter un seul joueur :",GRN);
     print_elem_menu("2. Ajouter multiple joueur :",BLU);
     print_header_footer();
     int choix = 0;
-    printf("Donner votre choix                      : ");
+    printf("Donner votre choix : ");
     scanf("%d",&choix);
     if(choix<1 || choix>2){
         do {
-            printf("Donner un choix convenable      : ");
+            printf("Donner un choix convenable : ");
             scanf("%d",&choix);
         } while(choix <1 && choix >2);
     }

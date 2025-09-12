@@ -652,8 +652,6 @@ void fenetre_affichage(joueur equipe[] ,int n){
         return;
     }
     print_error_ou_titre("Fenettre d'affichage ");
-    printf("\n \n");
-    print_header_footer();
     print_elem_menu("1. Afficher les joueurs trier le nom par ordre alphabetique.",GRN);
     print_elem_menu("2. Afficher les joueurs trier par age.",MAG);
     print_elem_menu("3. Afficher les joueurs trier par poste.",CYN);
@@ -806,8 +804,6 @@ void fenetre_choix_modification_par_nom_ou_ident(joueur equipe[],int n){
         return;
     }
     print_error_ou_titre("Fenetre de choix des modification");
-    printf("\n \n");
-    print_header_footer();
     print_elem_menu("1. Modifier par nom et prenom.",CYN);
     print_elem_menu("2. Modifier par identiter de joueur.",MAG);
     print_header_footer();
@@ -888,9 +884,6 @@ int fenetre_supprimer(joueur equipe[],int n){
         return n;
     }
     print_error_ou_titre("Fenetre de choix des suppressions");
-    printf("\n \n");
-
-    print_header_footer();
     print_elem_menu("1. Supprimer par nom et prenom.",CYN);
     print_elem_menu("2. Supprimer par identiter de joueur.",MAG);
     print_header_footer();
@@ -979,7 +972,7 @@ void fenetre_recherche_joueur(joueur equipe[],int n){
         print_error_ou_titre("L'equipe est vide !!!");
         return;
     }
-    print_header_footer();
+    print_error_ou_titre("Fenettre de recherche");
     print_elem_menu("1. Rechercher par le nom.",CYN);
     print_elem_menu("2. Rechercher par l'identiter de joueur.",MAG);
     print_elem_menu("3. Rechercher par post.",CYN);
@@ -1148,7 +1141,7 @@ void fenetre_statistique(joueur equipe[],int n){
         return;
     }
     print_error_ou_titre("Fenetre des Statistiques");
-    printf("\n \n");
+    printf("\n");
 
     int but ;
     printf("Donner le nombre de but pour les statistique : ");
@@ -1207,7 +1200,11 @@ void enregistrer_fichier(joueur equipe[],int n){
 
 int lire_depui_fichier(joueur equipe[], int n){
     FILE *f;
+    system("cls");
     f=fopen("equipe.txt","r");
+    if(f==NULL){
+        print_error_ou_titre("Il y a un erreur lorsque ouverir le fichier !! ");
+    }
     joueur temp;
     char c[256];
     fgets(c,sizeof(c),f);

@@ -1,0 +1,19 @@
+Id	Nom	Prenom	Numero du Maillot	Post	Age	But	Date Inscription	Status
+1	courtois	thibaut	1	gardien	33	0	1/7/2018	titulaire
+2	lunin	andriy	13	gardien	26	0	1/7/2018	remplacant
+3	carvajal	dani	2	defenseur	33	8	1/7/2013	titulaire
+4	rudiger	antonio	22	defenseur	44	18	1/7/2022	titulaire
+5	alaba	david	4	defenseur	33	35	1/7/2021	titulaire
+6	mendy	ferland	23	defenseur	30	5	1/7/2019	titulaire
+7	nacho	fernandez	6	defenseur	35	15	1/7/2012	remplacant
+8	valverde	federico	15	milieu	27	25	1/7/2016	titulaire
+9	camavinga	eduardo	12	milieu	22	7	1/7/2021	titulaire
+10	tchouameni	aurelien	18	milieu	25	12	1/7/2022	titulaire
+11	modric	luka	10	milieu	39	80	1/7/2012	remplacant
+12	kroos	toni	8	milieu	35	75	1/7/2014	remplacant
+13	bellingham	jude	5	milieu	22	40	1/7/2023	remplacant
+14	vinicius	junior	7	attaquant	25	80	1/7/2018	titulaire
+15	rodrygo	goes	11	attaquant	24	50	1/7/2019	titulaire
+16	joselu	martinez	14	attaquant	35	120	1/7/2023	titulaire
+17	endrick	felipe	16	attaquant	18	5	1/7/2024	remplacant
+18	guler	arda	24	attaquant	20	10	1/7/2023	remplacant
